@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  - let results=[{TransportationType: "Air",Destination:"Chicago",Price:18},{TransportationType: "Water",Destination:"Newyork",Price:24},{TransportationType: "Road",Destination:"India",Price:1000}]
+  div.container-fluid
+    div.row
+      each item, index in results
+        div(class='col-sm-2', onclick=`buy(${index})`)
+          p TransportationType is #{item.TransportationType}
+          p Destination is #{item.Destination}
+          p Price: #{item.Price}
+          p Value at index #{index} is: #{item.TransportationType}, #{item.Destination}, #{item.Price}
+  script.
+    function buy(i) {
+      alert("You purchased item " + (i + 1));
+    }
