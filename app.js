@@ -6,7 +6,7 @@ var logger = require('morgan');
 
 const mongoose = require("mongoose");
 var resourceRouter = require('./routes/resource');
-var costumeRouter = require('./routes/costumes');
+//var costumeRouter = require('./routes/costumes');
 require('dotenv').config();
 const connectionString = process.env.MONGO_CON
 mongoose.connect(connectionString, {
@@ -26,48 +26,36 @@ var usersRouter = require('./routes/users');
 var transportationRouter = require('./routes/transportation');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
-var Costume = require('./models/costume');
+var transportation = require('./models/transportation');
 
 
 async function recreateDB(){
 
   // Delete everything
  
-  await Costume.deleteMany();
+  await transportation.deleteMany();
  
-  let instance1 = new Costume(
+  let instance1 = new transportation(
  
    {
  
-    costume_type: "Casual wear",
- 
-    size:'Medium',
- 
-    cost:20
+    TransportationType: "Air",Destination:"Chicago",Price:18
  
    });
  
-   let instance2 = new Costume(
+   let instance2 = new transportation(
  
     {
  
-     costume_type: "party wear",
- 
-     size: 'Medium',
- 
-     cost: 89.4
+      TransportationType: "Water",Destination:"Newyork",Price:24
  
     });
  
-    let instance3 = new Costume(
+    let instance3 = new transportation(
  
      {
  
-      costume_type: "Traditional wear",
- 
-      size: 'Extra Small',
- 
-      cost: 20.5
+      TransportationType: "Road",Destination:"India",Price:1000
  
      });
  
@@ -112,7 +100,7 @@ app.use('/transportation', transportationRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
 app.use("/resource", resourceRouter);
-app.use('/costumes', costumeRouter);
+//app.use('/costumes', costumeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
