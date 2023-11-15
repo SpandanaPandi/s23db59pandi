@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  h1= title
+  form(id='TransportationForm', action="/resource/transportation", method="POST")
+    div.form-group
+      label.transportationAttr(for='TransportationType') Transportation type
+      input#costume_type(type='text', name='TransportationType')
+    div.form-group
+      label.transportationAttr(for='Destination') Destination
+      input#size(type='text', name='Destination')
+    div.form-group
+      label.transportationAttr(for='Price')  price
+      input#cost(type='number', name='Price')
+    input(type="submit")
+    script.
+      document.forms['TransportationForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show user that form is being submitted
+        fetch(event.target.action, {
+          method: 'POST',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Save succeeded")
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Save failed " + error)
+        });
+      });
