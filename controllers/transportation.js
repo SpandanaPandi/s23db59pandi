@@ -58,9 +58,22 @@ exports.transportation_create_post = async function (req, res) {
 };
 
 // Handle Costume delete form on DELETE.
-exports.transportation_delete = function (req, res) {
-    res.send('NOT IMPLEMENTED: Transportation delete DELETE ' + req.params.id);
-};
+exports.transportation_delete = async function (req, res) {
+    // Handle Costume delete on DELETE.
+    //exports.costume_delete = async function(req, res) {
+    console.log("delete " + req.params.id)
+    try {
+    result = await Transportation.findByIdAndDelete( req.params.id)
+    console.log("Removed " + result)
+    res.send(result)
+    } catch (err) {
+    res.status(500)
+    res.send(`{"error": Error deleting ${err}}`);
+    }
+    };
+    
+    //res.send('NOT IMPLEMENTED: Transportation delete DELETE ' + req.params.id);
+
 // Handle Costume update form on PUT.
 exports.transportation_update_put = async function (req, res) {
     console.log(`update on id ${req.params.id} with body
@@ -81,4 +94,17 @@ ${JSON.stringify(req.body)}`)
        res.send(`{"error": ${err}: Update for id ${req.params.id}
        failed`);
     }
+
 };
+exports.transportation_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await Transportation.findById( req.query.id)
+    res.render('transportationdetail',
+    { title: 'Transportation Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+    };
