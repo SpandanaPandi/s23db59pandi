@@ -1,42 +1,47 @@
 extends layout
+
 block content
   h1= title
-  - let transportationid = toShow._id
-  - let TransportationType = toShow.TransportationType
-  - let Destination = toShow.Destination
-  - let Price = toShow.Price
-  
-  div.row(class='mb-2')
-    div.mr-1 ID is
-    div #{transportationid}
-  
-  - let actionid = "/resource/transportation/" + transportationid
-  form(id='TransportationForm', action= actionid, method="PUT")
-    div.form-group
-      label.transportationAttr(for='TransportationType') Transportation type
-      input#TransportationType(type='text', name='TransportationType', value= TransportationType)
-    div.form-group
-      label.transportationAttr(for='Destination') Destination
-      input#size(type='text', name='Destination', value= Destination)
-    div.form-group
-      label.transportationAttr(for='Price') Price
-      input#cost(type='number', name='Price', value= Price)
-    input(type="submit")
-  
-    script.
-      document.forms['TransportationForm'].addEventListener('submit', (event) => {
-        event.preventDefault();
-        // TODO do something here to show user that form is being submitted
-        fetch(event.target.action, {
-          method: 'PUT',
-          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
-        }).then((resp) => {
-          return resp.json(); // or resp.text() or whatever the server sends
-        }).then((body) => {
-          alert("Update succeeded");
-          // TODO handle body
-        }).catch((error) => {
-          // TODO handle error
-          alert("Update failed " + error);
+  if (toShow == null)
+    h2 No instance to update
+  else
+    - let transportationid = toShow._id
+    - let TransportationType = toShow.TransportationType
+    - let Destination = toShow.Destination
+    - let Price = toShow.Price
+    
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{transportationid}
+    
+    - let actionid = "/resource/transportation/" + transportationid
+    form(id='TransportationForm', action= actionid, method="PUT")
+      div.form-group
+        label.transportationAttr(for='TransportationType') Transportation type
+        input#TransportationType(type='text', name='TransportationType', value= TransportationType)
+      div.form-group
+        label.transportationAttr(for='Destination') Destination
+        input#size(type='text', name='Destination', value= Destination)
+      div.form-group
+        label.transportationAttr(for='Price') Price
+        input#cost(type='number', name='Price', value= Price)
+      input(type="submit")
+      
+      script.
+        document.forms['TransportationForm'].addEventListener('submit', (event) => {
+          event.preventDefault();
+          // TODO do something here to show user that form is being submitted
+          fetch(event.target.action, {
+            method: 'PUT',
+            body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+          }).then((resp) => {
+            return resp.json(); // or resp.text() or whatever the server sends
+          }).then((body) => {
+            alert("Update succeeded");
+            window.location.href='/transportation';
+            // TODO handle body
+          }).catch((error) => {
+            // TODO handle error
+            alert("Update failed " + error);
+          });
         });
-      });

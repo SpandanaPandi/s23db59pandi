@@ -2,26 +2,29 @@ extends layout
 
 block content
   h1= title
-  - let transportationid = toShow._id
-  - let transportation_type = toShow.TransportationType
-  - let destination = toShow.Destination
-  - let price = toShow.Price
-  div
-    div.row
-      div(class='transportationAttr mr-3') Transportation ID is:
-      div #{transportationid}
-    div.row
-      div(class='transportationAttr mr-3') Transportation Type is:
-      div #{transportation_type}
-    div.row
-      div(class='transportationAttr mr-3') Transportation Destination is:
-      div #{destination}
-    div.row
-      div(class='transportationAttr mr-3') Transportation Price is:
-      div #{price}
+  if (toShow == null)
+    h2 No instance to check detail
+  else
+    - let transportationid = toShow._id
+    - let transportation_type = toShow.TransportationType
+    - let destination = toShow.Destination
+    - let price = toShow.Price
+    div
+      div.row
+        div(class='transportationAttr mr-3') Transportation ID is:
+        div #{transportationid}
+      div.row
+        div(class='transportationAttr mr-3') Transportation Type is:
+        div #{transportation_type}
+      div.row
+        div(class='transportationAttr mr-3') Transportation Destination is:
+        div #{destination}
+      div.row
+        div(class='transportationAttr mr-3') Transportation Price is:
+        div #{price}
 
-  style.
-    .transportationAttr {
-      background-color: aquamarine;
-      width: 120px;
-    }
+    style.
+      .transportationAttr {
+        background-color: aquamarine;
+        width: 120px;
+      }
