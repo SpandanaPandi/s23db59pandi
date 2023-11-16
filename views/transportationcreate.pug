@@ -5,13 +5,13 @@ block content
   form(id='TransportationForm', action="/resource/transportation", method="POST")
     div.form-group
       label.transportationAttr(for='TransportationType') Transportation type
-      input#costume_type(type='text', name='TransportationType')
+      input#TransportationType(type='text', name='TransportationType')
     div.form-group
       label.transportationAttr(for='Destination') Destination
-      input#size(type='text', name='Destination')
+      input#Destination(type='text', name='Destination')
     div.form-group
-      label.transportationAttr(for='Price')  price
-      input#cost(type='number', name='Price')
+      label.transportationAttr(for='Price') Transportation price
+      input#Price(type='number', name='Price')
     input(type="submit")
     script.
       document.forms['TransportationForm'].addEventListener('submit', (event) => {
@@ -30,3 +30,8 @@ block content
           alert("Save failed " + error)
         });
       });
+
+
+
+
+

@@ -10,3 +10,17 @@ a {
   background-color: aquamarine;
   width: 120px;
   }
+
+#TransportationForm {
+    width: 50%; /* Adjust width as needed */
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Style for form inputs and labels */
+.form-group {
+    margin-bottom: 15px;
+  }
