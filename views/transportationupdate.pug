@@ -25,8 +25,8 @@ block content
       div.form-group
         label.transportationAttr(for='Price') Price
         input#cost(type='number', name='Price', value= Price)
-      input(type="submit")
       
+      button.btn.btn-primary(type="submit") Update transportation
       script.
         document.forms['TransportationForm'].addEventListener('submit', (event) => {
           event.preventDefault();
@@ -38,7 +38,6 @@ block content
             return resp.json(); // or resp.text() or whatever the server sends
           }).then((body) => {
             alert("Update succeeded");
-            window.location.href='/transportation';
             // TODO handle body
           }).catch((error) => {
             // TODO handle error

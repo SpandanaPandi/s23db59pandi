@@ -1,17 +1,15 @@
 extends layout
-
 block content
   h1= title
-  - let results=[{TransportationType: "Air",Destination:"Chicago",Price:18},{TransportationType: "Water",Destination:"Newyork",Price:24},{TransportationType: "Road",Destination:"India",Price:1000}]
-  div.container-fluid
-    div.row
-      each item, index in results
-        div(class='col-sm-2', onclick=`buy(${index})`)
-          p TransportationType is #{item.TransportationType}
-          p Destination is #{item.Destination}
-          p Price: #{item.Price}
-          p Value at index #{index} is: #{item.TransportationType}, #{item.Destination}, #{item.Price}
+  //- let results = [ { TransportationType: "Air",Destination:"Chicago",Price:18 }, { TransportationType: "Water",Destination:"Newyork",Price:24 }, { TransportationType: "Road",Destination:"India",Price:1000} ];
+  - let items = results;
+  div(class="container-fluid")
+    div(class="row m-1")
+      each item in items
+        - let destination = `dispatch(\"/transportation/update?id=${item._id}\")`
+        div(class="row-sm-2 m-1")  #{item.TransportationType}(#{item.Destination}) #{item.Price}
+        button.btn(class="btn-primary ml-1", onclick=destination) Update
   script.
-    function buy(i) {
-      alert("You purchased item " + (i + 1));
+    function dispatch(path){
+      window.location.href = path;
     }
