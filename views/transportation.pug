@@ -1,15 +1,25 @@
 extends layout
 block content
   h1= title
-  //- let results = [ { TransportationType: "Air",Destination:"Chicago",Price:18 }, { TransportationType: "Water",Destination:"Newyork",Price:24 }, { TransportationType: "Road",Destination:"India",Price:1000} ];
+  
   - let items = results;
+  - let create = `dispatch("/transportation/create")`
+  button.btn(class="btn-info", onclick=create) Add new transportation
   div(class="container-fluid")
     div(class="row m-1")
       each item in items
-        - let destination = `dispatch(\"/transportation/update?id=${item._id}\")`
-        div(class="row-sm-2 m-1")  #{item.TransportationType}(#{item.Destination}) #{item.Price}
-        button.btn(class="btn-primary ml-1", onclick=destination) Update
+        - let destination = `dispatch("/transportation/update?id=${item._id}")`
+        - let detail = `dispatch(\"/transportation/detail/?id=${item._id}")`
+        - let deletetransportation = `dispatch(\"/transportation/delete/?id=${item._id}")`
+        div(class="row-sm-2 m-1") 
+          | #{item.TransportationType} (#{item.Destination}) #{item.Price}
+          button.btn(class="btn-primary ml-1", onclick=destination) Update  
+          br
+          br
+          button.btn( class="btn-success", onclick= detail) Details
+          button.btn( class="btn-dark", onclick= deletetransportation) Delete
   script.
     function dispatch(path){
       window.location.href = path;
     }
+  
