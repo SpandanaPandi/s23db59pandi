@@ -9,15 +9,15 @@ const secured = (req, res, next) => {
     res.redirect("/login");
     }
 /* GET home page. */
-router.get('/',transportation_controller.transportation_view_all_Page);
-router.get('/detail', transportation_controller.transportation_view_one_Page);
+router.get('/',secured,transportation_controller.transportation_view_all_Page);
+router.get('/detail', secured,transportation_controller.transportation_view_one_Page);
 /* GET create costume page */
-router.get('/create', transportation_controller.transportation_create_Page);
+router.get('/create',secured, transportation_controller.transportation_create_Page);
 /* GET create update page */
 router.get('/update', secured, transportation_controller.transportation_update_Page);
 /* GET delete costume page */
-router.get('/delete', transportation_controller.transportation_delete_Page);
-router.post('/login', passport.authenticate('local'), function(req, res) {
+router.get('/delete',secured, transportation_controller.transportation_delete_Page);
+router.post('/login',secured, passport.authenticate('local'), function(req, res) {
     res.redirect('/');
     });
 module.exports = router; 

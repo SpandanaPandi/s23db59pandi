@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 const transportationSchema = mongoose.Schema({
-    TransportationType: String,
+    TransportationType:  { type:String , required: true, maxLength:[10] },
     Destination: String,
     Price: {
         type: Number,
